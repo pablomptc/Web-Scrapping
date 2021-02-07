@@ -1,3 +1,5 @@
+#TWITTER DATA EXTRACION BY TOPIC#
+
 #Libraries
 import tweepy
 import csv
