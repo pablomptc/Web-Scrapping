@@ -11,6 +11,7 @@ import re
 
 #Credentials
 #Input your credentials here in xxx
+#To obtain twitter credentials you must register on the page https://developer.twitter.com/en as a developer
 consumer_key = "xxx"
 consumer_secret = "xxx"
 access_token = "xxx"
