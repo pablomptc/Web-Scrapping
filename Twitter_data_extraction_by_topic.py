@@ -27,12 +27,12 @@ api = tweepy.API (auth, wait_on_rate_limit = True)
 
 
 # Csv document creation to append data
-csvFile = open('tweets.csv', 'a')
+csvFile = open ('tweets.csv', 'a')
 
 
 
 # Use csv writer
-csvWriter = csv.writer(csvFile)
+csvWriter = csv.writer (csvFile)
 
 
 
@@ -42,15 +42,15 @@ csvWriter = csv.writer(csvFile)
 # lang = language
 # since = date
 
-for tweet in tweepy.Cursor(api.search,
+for tweet in tweepy.Cursor (api.search,
                            q = "#unitedAIRLINES",
                            count = 100,
                            lang = "en",
-                           since = "2017-04-03").items():
+                           since = "2017-04-03").items ():
 
     print (tweet.created_at, tweet.text)
 
-    csvWriter.writerow([tweet.created_at, tweet.text.encode('utf-8')])
+    csvWriter.writerow ([tweet.created_at, tweet.text.encode ('utf-8')])
 
 
 
