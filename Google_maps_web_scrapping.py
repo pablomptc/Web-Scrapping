@@ -1,8 +1,13 @@
+# WEB SCRAPPING GOOGLE MAPS
+# From coordinates, radius and keyword, it is possible to obtain all the places within this circle.
+
+# Libraries 
 import requests
 import json
 import time
 import pandas as pd
 
+# Data extraction
 class GooglePlaces(object):
     def __init__(self, apiKey):
         super(GooglePlaces, self).__init__()
@@ -41,8 +46,10 @@ class GooglePlaces(object):
         return place_details
 
 
+# To get the following number you have to sign up in Google Cloud Platform
 api = GooglePlaces("AIzaSyAoxhDWppkYjOKNjelGF9uBbQPRme2t9Tw")
 
+# Write coordinates of the place, radius and keyword
 places = api.search_places_by_coordinate("40.819057,-73.914048", "1000", "restaurant")
 
 fields = ['name', 'formatted_address', 'international_phone_number', 'website', 'rating', 'review']
@@ -93,29 +100,8 @@ for place in places:
 
 lista
 
-df = pd.DataFrame({'lista': lista})
+google_maps = pd.DataFrame({'lista': lista})
 
-df["lista"]
+google_maps["lista"]
 
-df.to_csv("df1.csv")
-b = pd.read_csv("df1.csv")
-
-#Cleaning and creation of "Rating"
-b["Rating"] = b.lista.str.split(",", n=2).apply(lambda l: ":".join(l[:-1]))
-b["Rating"] = b["Rating"].str.split("Rating:", n=1).apply(lambda l: ":".join(l[-1:]))
-b["Rating"] = b["Rating"].str.split("':", n=1).apply(lambda l: ":".join(l[-1:]))
-b["Rating"]
-
-#Cleaning and creation of "Name_of_restaurant"
-b["Name_of_restaurant"] = b.lista.str.split("Name of restaurant:", n=1).apply(lambda l: ":".join(l[1:]))
-b["Name_of_restaurant"] = b.Name_of_restaurant.str.split("'Text:'", n=1).apply(lambda l: ":".join(l[:-1]))
-b["Name_of_restaurant"] = b.Name_of_restaurant.str.split(",", n=1).apply(lambda l: ":".join(l[1:]))
-b["Name_of_restaurant"] = b.Name_of_restaurant.str.split("'", n=1).apply(lambda l: ":".join(l[1:]))
-b["Name_of_restaurant"] = b.Name_of_restaurant.str.split("'", n=1).apply(lambda l: ":".join(l[:1]))
-b["Name_of_restaurant"]
-
-#Cleaning and creation of "Text"
-b["Text"] = b.lista.str.split("Text:", n=1).apply(lambda l: ":".join(l[1:]))
-b["Text"] = b.Text.str.split("'", n=1).apply(lambda l: ":".join(l[1:]))
-b["Text"] = b.Text.str.split("'", n=1).apply(lambda l: ":".join(l[1:]))
-b["Text"]
+google_maps.to_csv("google_maps.csv")
